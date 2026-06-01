@@ -33,10 +33,25 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      // Set the session token as a cookie
-      document.cookie = `session_token=${encodeURIComponent(email)}; path=/; max-age=86400; SameSite=Strict`;
+      // Verify credentials against backend
+      const response = await fetch('/api/auth/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: email, password }),
+      });
 
-      // Verify access by attempting to navigate
+      if (!response.ok) {
+        setError('Invalid credentials. Please try again.');
+        setIsLoading(false);
+        return;
+      }
+
+      const { token } = await response.json();
+
+      // Set the session token as a cookie
+      document.cookie = `session_token=${encodeURIComponent(token)}; path=/; max-age=86400; SameSite=Strict`;
+
+      // Navigate to utils
       router.push('/utils');
     } catch (err) {
       setError('Authentication failed. Please try again.');
