@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Prepare the request payload for Claude 3.5 Sonnet
+    // Prepare the request payload for Claude
     const payload = {
       anthropic_version: 'bedrock-2023-05-31',
       max_tokens: 4096,
@@ -48,12 +48,12 @@ export async function POST(request: NextRequest) {
         content: msg.content,
       })),
       temperature: 0.7,
-      top_p: 0.9,
+      // Note: Claude 4.x models don't support both temperature and top_p
     };
 
     // Invoke the model with streaming - Claude Opus 4.6
     const command = new InvokeModelWithResponseStreamCommand({
-      modelId: 'us.anthropic.claude-opus-4-6-20250514-v1:0',
+      modelId: 'us.anthropic.claude-opus-4-6-v1',
       contentType: 'application/json',
       accept: 'application/json',
       body: JSON.stringify(payload),
