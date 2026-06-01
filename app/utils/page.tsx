@@ -715,66 +715,73 @@ export default function DashboardPage() {
             </div>
 
             {/* Analysis Assistant Section */}
-            <div className={`${isChatOpen ? 'flex-1' : 'h-auto'} flex flex-col transition-all duration-200`}>
+            <div className={`${isChatOpen ? 'flex-1' : 'h-auto'} flex flex-col transition-all duration-200 min-h-0`}>
               {/* Chat Header */}
-              <div className="flex items-center justify-between px-4 py-3 bg-[#fafafa] border-b border-[#dbdbdb]">
+              <div className="flex items-center justify-between px-4 py-2.5 bg-[#fafafa] border-b border-[#dbdbdb] flex-shrink-0">
                 <button
                   onClick={() => setIsChatOpen(!isChatOpen)}
-                  className="flex items-center gap-2 flex-1 hover:text-[#1068bf] transition-colors"
+                  className="flex items-center gap-2 flex-1 hover:text-[#1068bf] transition-colors text-left"
                 >
-                  <MessageSquare size={16} className="text-[#1068bf]" />
+                  <MessageSquare size={16} className="text-[#1068bf] flex-shrink-0" />
                   <span className="text-sm font-semibold text-[#303030]">Analysis Assistant</span>
-                  <ChevronDown size={14} className={`text-[#525252] transition-transform ml-auto ${isChatOpen ? 'rotate-180' : ''}`} />
+                  {messages.length > 0 && (
+                    <span className="text-xs text-[#707070]">({messages.length})</span>
+                  )}
+                  <ChevronDown size={14} className={`text-[#525252] transition-transform ml-auto flex-shrink-0 ${isChatOpen ? 'rotate-180' : ''}`} />
                 </button>
-                {messages.length > 0 && (
+                {messages.length > 0 && isChatOpen && (
                   <button
                     onClick={() => {
-                      if (confirm('Clear chat history?')) {
+                      if (confirm('Clear all messages?')) {
                         setMessages([]);
                         localStorage.removeItem('chat_messages');
                       }
                     }}
-                    className="ml-2 px-2 py-1 text-xs text-[#525252] hover:text-red-600 hover:bg-[#f0f0f0] rounded"
-                    title="Clear chat"
+                    className="ml-2 p-1.5 text-[#525252] hover:text-red-600 hover:bg-[#f0f0f0] rounded transition-colors"
+                    title="Clear chat history"
                   >
-                    <X size={14} />
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
                   </button>
                 )}
               </div>
 
               {/* Chat Content */}
               {isChatOpen && (
-                <div className="flex-1 flex flex-col min-h-0">
+                <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
                   {/* Chat Messages */}
-                  <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-white scroll-smooth">
+                  <div className="flex-1 overflow-y-auto p-3 bg-white" style={{ scrollBehavior: 'smooth' }}>
                     {messages.length === 0 && (
-                      <div className="text-center text-[#707070] text-xs mt-12 px-4">
-                        <MessageSquare size={40} className="mx-auto mb-3 text-[#dbdbdb]" />
-                        <p className="font-medium mb-1">Analysis Assistant</p>
-                        <p className="text-[#999]">Upload files and ask questions about your code. I can help you understand, debug, and improve your project.</p>
+                      <div className="text-center text-[#707070] text-xs mt-8 px-3">
+                        <MessageSquare size={32} className="mx-auto mb-2 text-[#dbdbdb]" />
+                        <p className="font-medium mb-1 text-[#303030]">AI Code Assistant</p>
+                        <p className="text-[#999] leading-relaxed">Upload files and ask questions. I can analyze code, explain concepts, debug issues, and suggest improvements.</p>
                       </div>
                     )}
 
-                    {messages.map((message, index) => (
-                      <ChatMessage key={index} role={message.role} content={message.content} />
-                    ))}
+                    <div className="space-y-2">
+                      {messages.map((message, index) => (
+                        <ChatMessage key={index} role={message.role} content={message.content} />
+                      ))}
 
-                    {isLoading && (
-                      <div className="flex justify-start">
-                        <div className="bg-[#f5f5f5] border border-[#e5e5e5] rounded-lg p-3 flex items-center gap-2">
-                          <Loader2 className="animate-spin" size={14} />
-                          <span className="text-sm text-[#525252]">Analyzing...</span>
+                      {isLoading && (
+                        <div className="flex justify-start mb-2">
+                          <div className="bg-[#f5f5f5] border border-[#e5e5e5] rounded-lg px-3 py-2 flex items-center gap-2">
+                            <Loader2 className="animate-spin" size={14} />
+                            <span className="text-xs text-[#525252]">Analyzing...</span>
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      )}
+                    </div>
 
                     <div ref={messagesEndRef} />
                   </div>
 
                   {/* Uploaded Files Preview */}
                   {uploadedFiles.length > 0 && (
-                    <div className="px-4 py-2 border-t border-[#dbdbdb] bg-[#fafafa] max-h-32 overflow-y-auto">
-                      <div className="flex flex-wrap gap-2">
+                    <div className="px-3 py-2 border-t border-[#dbdbdb] bg-[#fafafa] max-h-24 overflow-y-auto flex-shrink-0">
+                      <div className="flex flex-wrap gap-1.5">
                         {uploadedFiles.map((file, index) => (
                           <div
                             key={index}
@@ -817,8 +824,8 @@ export default function DashboardPage() {
                   )}
 
                   {/* Chat Input */}
-                  <form onSubmit={handleSubmit} className="p-3 border-t border-[#dbdbdb] bg-white">
-                    <div className="flex gap-2 items-end">
+                  <form onSubmit={handleSubmit} className="p-2.5 border-t border-[#dbdbdb] bg-white flex-shrink-0">
+                    <div className="flex gap-1.5 items-end">
                       <input
                         ref={fileInputRef}
                         type="file"
@@ -831,8 +838,8 @@ export default function DashboardPage() {
                       <button
                         type="button"
                         onClick={() => fileInputRef.current?.click()}
-                        className="p-2 text-[#525252] hover:text-[#1068bf] hover:bg-[#f0f0f0] rounded"
-                        title="Upload files"
+                        className="p-2 text-[#525252] hover:text-[#1068bf] hover:bg-[#f0f0f0] rounded transition-colors flex-shrink-0"
+                        title="Attach files (images, code)"
                       >
                         <Paperclip size={16} />
                       </button>
@@ -846,16 +853,23 @@ export default function DashboardPage() {
                             handleSubmit(e);
                           }
                         }}
-                        placeholder="Ask a question..."
-                        className="flex-1 px-3 py-2 text-sm border border-[#dbdbdb] rounded focus:outline-none focus:ring-2 focus:ring-[#1068bf] focus:border-[#1068bf] resize-none transition-all"
-                        rows={2}
+                        placeholder="Ask about your code..."
+                        className="flex-1 px-2.5 py-1.5 text-sm border border-[#dbdbdb] rounded focus:outline-none focus:ring-2 focus:ring-[#1068bf] focus:border-[#1068bf] resize-none transition-all min-h-[36px] max-h-24"
+                        rows={1}
                         disabled={isLoading}
+                        style={{ height: 'auto' }}
+                        onInput={(e) => {
+                          const target = e.target as HTMLTextAreaElement;
+                          target.style.height = 'auto';
+                          target.style.height = Math.min(target.scrollHeight, 96) + 'px';
+                        }}
                       />
 
                       <button
                         type="submit"
                         disabled={isLoading || (!input.trim() && uploadedFiles.length === 0)}
-                        className="p-2 bg-[#1068bf] text-white rounded hover:bg-[#0b5cad] disabled:bg-[#dbdbdb] disabled:cursor-not-allowed"
+                        className="p-2 bg-[#1068bf] text-white rounded hover:bg-[#0b5cad] disabled:bg-[#dbdbdb] disabled:cursor-not-allowed transition-colors flex-shrink-0"
+                        title="Send message (Enter)"
                       >
                         <Send size={16} />
                       </button>
