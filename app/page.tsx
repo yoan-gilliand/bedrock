@@ -16,8 +16,9 @@ const readmeContent = `# Programmation Concurrente 2 - RabbitMQ Exam Cheat Sheet
 
 - 📚 [Cours & Slides](https://concurp2-lecture.kube-ext.isc.heia-fr.ch/) - Théorie et diapositives
 - 💻 [Code Snippets GitLab](https://gitlab.forge.hefr.ch/concurp/code-snippets) - Exemples de code
-- 🧪 [Lab20 - Printer System](https://concurp2-lecture.kube-ext.isc.heia-fr.ch/lab20) - Système d'impression
-- 🧪 [Lab21 - Translation RPC](https://concurp2-lecture.kube-ext.isc.heia-fr.ch/lab21) - Traducteur RPC
+- 🧪 [Lab20 - Printer System](https://concurp2-lecture.kube-ext.isc.heia-fr.ch/labs/lab20/) - Système d'impression
+- 🧪 [Lab21 - Translation RPC](https://concurp2-lecture.kube-ext.isc.heia-fr.ch/labs/lab21/) - Traducteur RPC
+- 🧪 [Lab22](https://concurp2-lecture.kube-ext.isc.heia-fr.ch/labs/lab22/) - Lab 22
 
 ---
 
@@ -44,6 +45,9 @@ const readmeContent = `# Programmation Concurrente 2 - RabbitMQ Exam Cheat Sheet
 - [Thread Safety](/snippets/threading) - Patterns multi-threading
 - [Error Handling](/snippets/errors) - Try/catch patterns
 - [Testing](/snippets/testing) - Comment tester RabbitMQ code
+
+### 🎯 Préparation Examen
+- [Tous les Exercices Possibles](/exercises/all) - 7 exercices complets type examen
 
 ---
 
