@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Document Analysis Platform',
-  description: 'Secure document analysis and chat interface powered by AWS Bedrock',
+  title: 'concurp2-lab21 · GitLab',
+  description: 'Python RabbitMQ RPC-based word-by-word translator using Unix pipes',
 };
 
 export default function RootLayout({
