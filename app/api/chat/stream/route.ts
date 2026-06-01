@@ -14,6 +14,21 @@ export const runtime = 'edge'; // Use edge runtime for streaming
 
 export async function POST(request: NextRequest) {
   try {
+    // Check AWS credentials
+    if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
+      console.error('AWS credentials not configured');
+      return new Response(
+        JSON.stringify({
+          error: 'Server configuration error',
+          details: 'AWS credentials not configured. Please set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables.'
+        }),
+        {
+          status: 500,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
+
     const { messages, systemPrompt } = await request.json();
 
     if (!messages || !Array.isArray(messages)) {
