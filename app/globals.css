@@ -62,24 +62,36 @@ select {
   margin-bottom: 0.25em;
 }
 
+/* Inline code - dark gray */
 .prose code {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: #2d2d2d !important;
+  color: #e9c062 !important;
   padding: 0.2em 0.4em;
   border-radius: 0.25rem;
   font-size: 0.875em;
+  border: 1px solid #444;
+  font-family: 'Monaco', 'Menlo', monospace;
 }
 
+/* Code blocks - GitHub dark theme */
 .prose pre {
-  background-color: rgba(0, 0, 0, 0.05);
-  padding: 1em;
-  border-radius: 0.5rem;
-  overflow-x: auto;
-  margin-bottom: 1em;
+  background-color: #0d1117 !important;
+  color: #e6edf3 !important;
+  padding: 1em !important;
+  border-radius: 0.5rem !important;
+  overflow-x: auto !important;
+  margin: 1em 0 !important;
+  border: 1px solid #30363d !important;
+  font-family: 'Monaco', 'Menlo', monospace !important;
+  line-height: 1.5 !important;
 }
 
 .prose pre code {
-  background-color: transparent;
-  padding: 0;
+  background-color: transparent !important;
+  color: inherit !important;
+  padding: 0 !important;
+  border: none !important;
+  font-size: 0.875rem !important;
 }
 
 .prose h1,

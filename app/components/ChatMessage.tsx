@@ -45,8 +45,8 @@ const CodeBlock = ({ inline, className, children, ...props }: CodeBlockProps) =>
             )}
           </button>
         </div>
-        <div className="relative overflow-hidden rounded border border-[#3e3e3e]">
-          <div className="flex items-center justify-between px-3 py-2 bg-[#1e1e1e] border-b border-[#3e3e3e]">
+        <div className="relative overflow-hidden rounded border border-[#30363d]">
+          <div className="flex items-center justify-between px-3 py-2 bg-[#1e1e1e] border-b border-[#30363d]">
             <span className="text-[#858585] text-xs font-mono">{language}</span>
           </div>
           <SyntaxHighlighter

@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'concurp2-lab21 · GitLab',
-  description: 'Python RabbitMQ RPC-based word-by-word translator using Unix pipes',
+  title: 'Programmation Concurrente · GitLab',
+  description: 'RabbitMQ Producer/Consumer Patterns - Exam Cheat Sheet',
 };
 
 export default function RootLayout({
